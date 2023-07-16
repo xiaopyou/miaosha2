@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.qi.miaosha2.mapper.TSeckillGoodsmapper">
+
+<select id="cxmsspbiao" resultType="com.qi.miaosha2.entrty.TSeckillGoods">
+    select * from t_seckill_goods WHERE goods_id=#{id}
+
+</select>
+</mapper>

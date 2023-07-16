@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qi.miaosha2.mapper.TGoodsmapper">
+    <select id="splbiao" resultType="com.qi.miaosha2.entrty.tgoodss">
+
+        SELECT tg.id,tg.goods_name,tg.goods_title,tg.goods_img,goods_detail,tg.goods_price,tg.goods_stock,teg.seckill_price,teg.stock_count,teg.start_date,teg.end_date from t_goods as tg inner JOIN t_seckill_goods as teg
+                                                                                                                                                                                                      on
+                                                                                                                                                                                                          tg.id=teg.goods_id
+
+    </select>
+    <select id="spmiaos" resultType="com.qi.miaosha2.entrty.tgoodss">
+
+        SELECT tg.id,tg.goods_name,tg.goods_title,tg.goods_img,goods_detail,tg.goods_price,tg.goods_stock,teg.seckill_price,teg.stock_count,teg.start_date,teg.end_date from t_goods as tg inner JOIN t_seckill_goods as teg
+                                                                                                                                                                                                      on
+                                                                                                                                                                                                          tg.id=teg.goods_id
+        where
+            tg.id=#{id}
+
+
+    </select>
+
+</mapper>
