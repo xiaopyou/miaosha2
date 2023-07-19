@@ -13,6 +13,7 @@ public class OrderController {
 
     @GetMapping("/order/{id}")
     public User getUser(@PathVariable String id){
+        System.out.println("ss");
         return  restTemplate.getForObject("http://localhost:8081/user/"+id,User.class);
     }
 
