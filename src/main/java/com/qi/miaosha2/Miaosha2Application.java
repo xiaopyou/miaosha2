@@ -10,6 +10,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.web.client.RestTemplate;
+
 @EnableAsync
 @EnableScheduling
 @EnableRabbit
@@ -26,6 +28,11 @@ public class Miaosha2Application {
         config.useSingleServer().setAddress("redis://127.0.0.1:6379");
         return (Redisson) Redisson.create(config);
 
+    }
+    //RestTemplate记得手动加入
+    @Bean
+    RestTemplate restTemplate(){
+        return new RestTemplate();
     }
 
 }
