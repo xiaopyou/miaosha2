@@ -130,11 +130,11 @@ class Miaosha2ApplicationTests {
     public void createUser(){//分批次插入数据
         List<TUser> users=new ArrayList<>();
         Integer q=0;
-        for(long i=0;i<10000;i++){
+        for(long i=0;i<1000;i++){
             TUser user=new TUser();
             user.setId(1300000000l+i);
             user.setNickname("adim"+i);
-            user.setPassword("a1c1be6cd699aa1a29b98571f4fb5431");
+            user.setPassword("1234");
             user.setSalt("qiyongle");
             user.setHead("1.jpg");
             user.setRegisterDate(new Date());
@@ -145,7 +145,7 @@ class Miaosha2ApplicationTests {
 //            tusermapper.insert(user);
         }
 //        boolean b =  batchInsertService.saveBatch(users);
-//        tusermapper.pilianzhul(users);
+        tusermapper.pilianzhul(users);
 
     }
     @Resource
