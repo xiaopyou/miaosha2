@@ -5,16 +5,16 @@ import com.qi.miaosha2.entrty.tgoodss;
 
 public class diandancha {
 
-    private tgoodss tgoodss;
+//    private tgoodss tgoodss;
     private String userid;//用户
     private String goodsid;//商品ID
-    public com.qi.miaosha2.entrty.tgoodss getTgoodss() {
-        return tgoodss;
-    }
-
-    public void setTgoodss(com.qi.miaosha2.entrty.tgoodss tgoodss) {
-        this.tgoodss = tgoodss;
-    }
+//    public com.qi.miaosha2.entrty.tgoodss getTgoodss() {
+//        return tgoodss;
+//    }
+//
+//    public void setTgoodss(com.qi.miaosha2.entrty.tgoodss tgoodss) {
+//        this.tgoodss = tgoodss;
+//    }
 
     public String getUserid() {
         return userid;
@@ -35,7 +35,7 @@ public class diandancha {
     @Override
     public String toString() {
         return "diandancha{" +
-                "tgoodss=" + tgoodss +
+//                "tgoodss=" + tgoodss +
                 ", userid=" + userid +
                 ", goodsid=" + goodsid +
                 '}';

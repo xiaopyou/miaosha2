@@ -92,17 +92,17 @@ public class TSeckillGoodsimpl implements TSeckillGoodsservice {
         tSeckillOrder.setGoodsId(tOrder1.getId());//商品ID
         tSeckillOrdermapper.insert(tSeckillOrder);
 
-        redis.opsForValue().set("order"+user_id+":"+tOrder1.getId(),tSeckillOrder);//把秒杀订单的消息存进redis里面
+        redis.opsForValue().set("order"+user_id+":"+tOrder1.getId(),tSeckillOrder);//把秒杀订单的消息存进redis里面 用来判断是否有重复的订单
 
         return tOrder;
     }
 
-
+    @Transactional
     public RespEntity scdindanrguanshu(String user_id, TGoods tGoods) {//后面进行升级 加分布式锁 还是有过期时间问题 看门狗解决或者设置一个唯一的id或者版本号
         String wyid= UUID.randomUUID().toString();
 
         try {
-            boolean suo= redis.opsForValue().setIfAbsent("lockKey",lock,30, TimeUnit.SECONDS);//不能有重复的key  实现一把简单的分布式锁     redis.expire("lockKey",30);//过期时间
+            boolean suo= redis.opsForValue().setIfAbsent("lockKey",wyid,30, TimeUnit.SECONDS);//不能有重复的key  实现一把简单的分布式锁     redis.expire("lockKey",30);//过期时间
             if (suo){
 
                 ValueOperations valueOperations= redis.opsForValue();
@@ -133,7 +133,7 @@ public class TSeckillGoodsimpl implements TSeckillGoodsservice {
             if (wyid.equals(redis.opsForValue().get("lockKey"))){//判断 如果相同说明是当前锁那就释放 如果不相同那就不是当前线程加的锁 (为了解决因为过期时间导致解开了别人的锁)
                 redis.delete("lockKey");//最后一定要释放锁
             }
-
+        // 看门狗 实现通过创建一个定时器去监控线程有没有执行完如果没有就自动续约如果有就不续约释放
         }
 
 
@@ -145,8 +145,9 @@ public class TSeckillGoodsimpl implements TSeckillGoodsservice {
     }
     @Autowired
     Redisson redisson;
-
+    @Transactional
     public RespEntity redissonsuo(String user_id, TGoods tGoods) {//redisson 如果设置了主从复制还是会有问题如果 用红锁（一般不用）
+        //redisson问题 锁丢失 可以用zookeperp解决因为我们redis在主从架构的时候如果我们的主redis宕机了那么我们从节点就会允许新的线程来加锁
         String wyid= UUID.randomUUID().toString();
         RLock rLock=redisson.getFairLock(wyid);
         try {

@@ -18,9 +18,10 @@ public class MD5util {
     //前端的加密传过来
     public static  String inputPassToDBPass(String inputpass,String salt){//第一个参数是接收前端加密的密码 第2个参数是加盐要统一
 
+       String jiam= formPassToDBPass(inputpass,salt);
+       System.out.println(jiam);
 
-
-        return formPassToDBPass(inputpass,salt);
+        return jiam;
     }
 
     public static void main(String[] args) {

@@ -39,7 +39,7 @@ public class Jwtgonj {
 
         return token;
     }
-    public String jiami(Long id){//这个方法是用来发送数据的
+    public String jiami(Long id){//生成token的
         String token=  JWT.create().withClaim("id",id)
                 .withExpiresAt(new Date(System.currentTimeMillis()+30000000))//设置登录之后30秒过期
                 .sign(Algorithm.HMAC256("qiyonglesb"));

@@ -53,7 +53,7 @@ com.qi.miaosha2.service.tuserservice tuserservice;
   @Autowired
   MQSender mqSender;
   private Map<Long,Boolean> EmptyStocMap =new HashMap<>();//标记reids库存是否还有 有库存 false 没有 true
-
+  public static final ThreadLocal t= new ThreadLocal();
 @PostMapping("dlu")
   public RespEntity cs(@RequestBody TUser tUser){
   System.out.println(tUser);
@@ -61,7 +61,12 @@ com.qi.miaosha2.service.tuserservice tuserservice;
   return tuserservice.dlu(tUser);
   }
 
+  @GetMapping("dlu2/{id}/{password}")
+  public RespEntity cs2(@PathVariable  String id ,@PathVariable  String password){
 
+
+    return tuserservice.dlucs(id,password);
+  }
   //加载商品
   @GetMapping("zhi")
   public RespEntity zhi(){
@@ -185,8 +190,8 @@ com.qi.miaosha2.service.tuserservice tuserservice;
 
     ValueOperations valueOperations=  redis.opsForValue();
     //先判断扣减reids里库存是否还有 这里有问题扣减库存没加锁可能会出现redis超扣问题这样我的MQ会生成重复数据 加锁或者MQ判断生成的消息是否重复
-   Long stock= valueOperations.decrement("seckillGoods:"+diandanchaz.getGoodsid());//扣减  原则性
-    System.out.println(stock);
+   Long stock= valueOperations.decrement("seckillGoods:"+diandanchaz.getGoodsid());//扣减对应秒杀商品数量 根据前端传来的商品id来找
+    System.out.println(stock+"扣减redis");
     System.out.println(diandanchaz.getGoodsid()+"sdsadasdsadasdasdasdasdas");
     if(stock<1){
       EmptyStocMap.put(kuc.getId(),true);
@@ -254,10 +259,10 @@ System.out.println("rle111111111111111");
 
 
 
-  @PostMapping("/csmiaos")
-  @ResponseBody
-  public RespEntity csmiaos ( @RequestBody diandancha diandanchaz)
+  @GetMapping("/csmiaos/{userid}/{goodsid}")  //测试秒杀接口
+  public RespEntity csmiaos (@PathVariable String  userid ,@PathVariable String  goodsid)//(@RequestParam(value = "diandanchaz",required = false)
   {
+    System.out.println(goodsid+userid);
     //进行令牌桶限流
     // 1. 阻塞式获取令牌
 //   rateLimiter.acquire();
@@ -276,7 +281,7 @@ System.out.println("rle111111111111111");
 //      return new RespEntity(4001,"地址不正确");
 //    }
     //判断当前是否还有库存(这里判断的是商品表的库存)
-    tgoodss kuc=tGoodsmapper.spmiaos(diandanchaz.getGoodsid());
+    tgoodss kuc=tGoodsmapper.spmiaos(goodsid);
 
     if (kuc.getStockCount()<1)
     {
@@ -284,7 +289,7 @@ System.out.println("rle111111111111111");
     }
     System.out.println(kuc.getStockCount()+"sdhasjkdashkdhaskdhkashda");
     //判断是否是重复购买  wt
-    TSeckillOrder tSeckillOrder1=  (TSeckillOrder)redis.opsForValue().get("order"+diandanchaz.getUserid()+":"+diandanchaz.getGoodsid());
+    TSeckillOrder tSeckillOrder1=  (TSeckillOrder)redis.opsForValue().get("order"+userid+":"+goodsid);
     if (tSeckillOrder1!=null){
 
       return new RespEntity(4002,"您已经购买一次了不可以再买");
@@ -293,16 +298,16 @@ System.out.println("rle111111111111111");
 
     ValueOperations valueOperations=  redis.opsForValue();
     //先判断扣减reids里库存是否还有
-    Long stock= valueOperations.decrement("seckillGoods:"+diandanchaz.getGoodsid());//扣减  原则性
+    Long stock= valueOperations.decrement("seckillGoods:"+goodsid);//扣减  原则性
     System.out.println(stock);
-    System.out.println(diandanchaz.getGoodsid()+"sdsadasdsadasdasdasdasdas");
+    System.out.println(goodsid+"sdsadasdsadasdasdasdasdas");
     if(stock<1){
       EmptyStocMap.put(kuc.getId(),true);
-      valueOperations.increment("seckillGoods:"+diandanchaz.getGoodsid());
+      valueOperations.increment("seckillGoods:"+goodsid);
       return new RespEntity(4004,"预减库存没有库存");
     }
 
-    SeckillMessage seckillMessage=  new SeckillMessage(diandanchaz.getUserid(),diandanchaz.getGoodsid());//
+    SeckillMessage seckillMessage=  new SeckillMessage(userid,goodsid);//
     Gson gson=new Gson();
 //    mqSender.sendSeckillMessage(gson.toJson(seckillMessage));//发送消息 通过MQ生成订单
     mqSender.sendSeckillMessage(seckillMessage);

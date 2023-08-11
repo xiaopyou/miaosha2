@@ -5,4 +5,5 @@ import com.qi.miaosha2.util.RespEntity;
 
 public interface tuserservice {
    public RespEntity dlu(TUser tUser);
+   public RespEntity dlucs(String id,String pwd);
 }
