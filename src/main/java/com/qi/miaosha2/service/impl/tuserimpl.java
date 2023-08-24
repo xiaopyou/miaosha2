@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 
 @Service
-public class tuserimpl implements tuserservice {
+public class tuserimpl implements tuserservice  {
     @Autowired
     tusermapper tusermapper;
     @Autowired
@@ -23,7 +23,7 @@ public class tuserimpl implements tuserservice {
     @Resource
     RedisTemplate<Object,Object> redis;
 
-        public RespEntity dlu(TUser tUser){
+        public RespEntity dlu(TUser tUser) {
             //先判断是否有值
             if (tUser==null){
                 System.out.println("不能为空");

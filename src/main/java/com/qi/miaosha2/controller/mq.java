@@ -3,6 +3,8 @@ package com.qi.miaosha2.controller;
 import com.qi.miaosha2.entrty.TSeckillOrder;
 import com.qi.miaosha2.pojo.rabbitmq.MQReceiver;
 import com.qi.miaosha2.pojo.rabbitmq.MQSender;
+import com.qi.miaosha2.util.RespEntity;
+import org.redisson.RedissonShutdownException;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -40,7 +42,14 @@ public class mq {
         }
     }
 
+    @GetMapping("ppp")
+    public void  aa(){
+        throw new RespEntity("4000","业务报错");
+//        String asd=null;
+//        String aa=new String(asd);
 
+
+    }
 
 
 }

@@ -12,7 +12,7 @@ public class OrderController {
     private RestTemplate restTemplate;
 
     @GetMapping("/order/{id}")
-    public User getUser(@PathVariable String id){
+    public User getUser(@PathVariable String id){ //多个springboot
         System.out.println("ss");
         return  restTemplate.getForObject("http://localhost:8081/user/"+id,User.class);
     }

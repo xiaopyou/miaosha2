@@ -32,12 +32,13 @@ public class MyRabbitMQConfig7 {
 //        args.put("x-max-length",1000);//队列最大个数
         args.put("x-dead-letter-exchange","qiyongleduilsxin");//绑定死行交换机
         args.put("x-dead-letter-routing-key","qisxduil2");// fanout模式不用配置 如果设置了队列key就要写
-        return new Queue(QUEUE_NAME, true, false, false, args);
+        return new Queue(QUEUE_NAME, true, false, false, args);//第一个参数 队列名 第2个 持久化  第三个 是否是共享排他性 第4个 自动删除 false 第五个 参数设置
     }
     @Bean
     public Queue queue2(){ // 死刑队列名称
-
-        return new Queue(QUEUE_NAME2,true,false,false);
+        Map<String,Object> args=new HashMap<>();
+//        args.put("x-message-ttl",100);//过期时间 如果重启服务器并且没有设置过期时间那么我们重启MQ的时候就会再次重复消费数据
+        return new Queue(QUEUE_NAME2,true,false,false,args);
     }
 
     /**

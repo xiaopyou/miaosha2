@@ -138,6 +138,8 @@ com.qi.miaosha2.service.tuserservice tuserservice;
     System.out.println(diandanchaz.getGoodsid());
     TGoods tGoods=  tGoodsmapper.selectOne(new QueryWrapper<TGoods>().eq("id",diandanchaz.getGoodsid()));
   return new RespEntity(200,"成功",tSeckillGoodsservice.scdindan(diandanchaz.getUserid(),tGoods));
+
+
   }
 
 
@@ -314,7 +316,16 @@ System.out.println("rle111111111111111");
     return new RespEntity(200,"正在排队中");
   }
 
+  @PostMapping("miaoshaxiadan")
+  public boolean ssdsds(@RequestParam("diandanchaz") diandancha diandanchaz){
+//    diandancha a=diandanchaz;
+//    System.out.println("sss"+a);
+//    Integer.parseInt("abc123");
+    String str = diandanchaz.getUserid();
+    str.equals("111");
+    return true;
 
+  }
 
 
 }

@@ -1,6 +1,6 @@
 package com.qi.miaosha2.util;
 
-public class RespEntity {//extends RuntimeException
+public class RespEntity extends RuntimeException {//extends RuntimeException
     private Integer code;
     private String msg;
 

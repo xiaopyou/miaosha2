@@ -21,7 +21,7 @@ public class MyRabbitMQConfig6 {
     public static final String confirm_exchange_name2 = "sxinjiaohuanj";
 
 
-    // 声明direct类型交换机交换机
+    // 声明direct类型交换机交换机 FanoutExchange 声明广播类型交换机交换机
     @Bean
     public DirectExchange confirmExchange(){
         /**
@@ -33,6 +33,7 @@ public class MyRabbitMQConfig6 {
          */
         return new DirectExchange(confirm_exchange_name);
     }
+
     //死行交换机
     @Bean
     public DirectExchange confirmExchange2(){

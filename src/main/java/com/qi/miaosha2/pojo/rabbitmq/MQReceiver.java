@@ -123,7 +123,13 @@ public class MQReceiver {//implements ChannelAwareMessageListener 消费者
         System.out.println(msg.toString());
 
     }
-//    @RabbitListener(queues = "qiyongleACK")
+//   @RabbitListener(queues = "qiyongleACK")
+//    public void handleUserMessageACK(List<TSeckillOrder> msg) throws IOException {
+//
+//    System.out.println("ACK消费成功");
+//    System.out.println(msg.toString());
+//
+//    }
     @RabbitListener(queues = "qiyonglsxin")
     public void handleUserMessageACK3(List<TSeckillOrder> msg) throws IOException {
 
@@ -131,7 +137,27 @@ public class MQReceiver {//implements ChannelAwareMessageListener 消费者
         System.out.println(msg.toString());
 
     }
-
+//    @RabbitListener(queues = "qiyongleguanb")
+//    public void guanbp1(List<TSeckillOrder> msg) throws IOException {
+//
+//        System.out.println("guanp");
+//        System.out.println(msg.toString());
+//
+//    }
+//    @RabbitListener(queues = "qiyongleguanb2")
+//    public void guanbp2(List<TSeckillOrder> msg) throws IOException {
+//
+//        System.out.println("guanbp3");
+//        System.out.println(msg.toString());
+//
+//    }
+//    @RabbitListener(queues = "qiyongleguanb3")
+//    public void guanbp3(List<TSeckillOrder> msg) throws IOException {
+//
+//        System.out.println("guanbp3");
+//        System.out.println(msg.toString());
+//
+//    }
 
 //    @RabbitListener(queues = "dead_queue_springboot")//ACK确认
 //    public void handleUserMessage4(Message message, Channel channel) throws IOException {

@@ -17,10 +17,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 @SpringBootTest
@@ -122,8 +119,10 @@ class Miaosha2ApplicationTests {
     BatchInsertServiceImpl batchInsertService;
     @Test
     void eqwe(){
+//        redisTemplate.opsForValue().set("hello","lllllll");
 
-        redisTemplate.opsForValue().set("hello","lllllll");
+        String a=null;
+        System.out.println(a);
 
     }
     @Test
@@ -131,6 +130,7 @@ class Miaosha2ApplicationTests {
         List<TUser> users=new ArrayList<>();
         Integer q=0;
         for(long i=0;i<1000;i++){
+
             TUser user=new TUser();
             user.setId(1300000000l+i);
             user.setNickname("adim"+i);
@@ -145,7 +145,9 @@ class Miaosha2ApplicationTests {
 //            tusermapper.insert(user);
         }
 //        boolean b =  batchInsertService.saveBatch(users);
+
         tusermapper.pilianzhul(users);
+
 
     }
     @Resource
@@ -160,6 +162,23 @@ class Miaosha2ApplicationTests {
 ////                    new User("baobao" + i, 18, new Date()), correlationData);
 //        }
 //    }
+
+    @Test
+    public void  ss(){
+        String asd=null;
+        String aa=new String(asd);
+        HashSet<String> list=new HashSet<>();
+        Iterator<String> it=list.iterator(); //获取当前集合里面的值
+        while (it.hasNext()){//it.hasNext() 迭代器 是否还有元素
+         String ele= it.next(); //it.next() 获取当前集合值
+            if (ele.contains("sb")){ // 判断当前值是否为 sb如果是就true没有false
+it.remove();
+
+            }
+
+        }
+
+    }
 
 
 }

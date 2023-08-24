@@ -21,4 +21,9 @@ public class BatchInsertServiceImpl extends ServiceImpl<OrderMapper, Order> impl
 //    public boolean saveBatch(List<TUser> users) {
 //        return super.saveBatch(entityList);
 //    }
+
+//    @Override
+//    public boolean saveBatch(List<TUser> users) {
+//        return super.saveBatch(entityList);
+//    }
 }

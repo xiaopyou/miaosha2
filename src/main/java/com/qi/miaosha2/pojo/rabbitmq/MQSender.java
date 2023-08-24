@@ -83,7 +83,7 @@ public class MQSender {//发送者
 //        //设置交换器的确认
         rabbitTemplate.setConfirmCallback(confirmCallbackService);
         rabbitTemplate.setReturnsCallback(returnCallbackService);
-        Thread.sleep(5000);
+//        Thread.sleep(5000);
         //这里故意将routingKey参数写入错误，让其应发确认消息送到队列失败回调
         rabbitTemplate.convertAndSend("qiyongleduilACK", "qiACK", message);
 
