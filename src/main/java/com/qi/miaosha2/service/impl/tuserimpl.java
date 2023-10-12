@@ -8,12 +8,13 @@ import com.qi.miaosha2.util.Jwtgonj;
 import com.qi.miaosha2.util.MD5util;
 import com.qi.miaosha2.util.RespEntity;
 import com.qi.miaosha2.util.ValidatorUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-
+@Slf4j
 @Service
 public class tuserimpl implements tuserservice  {
     @Autowired
@@ -34,7 +35,7 @@ public class tuserimpl implements tuserservice  {
 
 
                     String.valueOf(tUser.getId()))){//
-                System.out.println("手机号不符合");
+             log.info("手机号不符合");
                 return new RespEntity(4002,"手机号不符合");
             }
 

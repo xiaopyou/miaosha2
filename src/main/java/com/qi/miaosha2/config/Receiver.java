@@ -13,15 +13,13 @@ import org.springframework.stereotype.Component;
 @Component
 public class Receiver implements ChannelAwareMessageListener
 {
-//    @RabbitListener(queues = "qiyongleACK")
+    @RabbitListener(queues = "qiyongleACK")
     @Override
     public void onMessage(Message message, Channel channel) throws Exception
     {
         long deliveryTag = message.getMessageProperties().getDeliveryTag();
         try
         {
-            System.out.println("接收消息: " + new String(message.getBody(), "UTF-8"));
-
             /**
              * 确认消息，参数说明：
              * long deliveryTag：唯一标识 ID。
@@ -29,6 +27,10 @@ public class Receiver implements ChannelAwareMessageListener
              * 则可以一次性确认 deliveryTag 小于等于传入值的所有消息。
              */
             channel.basicAck(deliveryTag, true);
+
+            System.out.println("接收消息: " + new String(message.getBody(), "UTF-8"));
+
+
 
             /**
              * 否定消息，参数说明：

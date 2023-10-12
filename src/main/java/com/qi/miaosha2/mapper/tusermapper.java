@@ -9,5 +9,6 @@ import java.util.List;
 @Mapper
 public interface tusermapper extends BaseMapper<TUser> {
     public int pilianzhul(List<TUser> list);
+    public int cs(TUser tUser);
 
 }

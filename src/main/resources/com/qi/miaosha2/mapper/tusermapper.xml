@@ -12,4 +12,12 @@
 
 
     </insert>
+    <insert id="cs"  >
+
+        INSERT INTO t_user (`id`, `nickname`, `password`, `salt`, `head`, `register_date`, `last_login_date`, `login_count`) VALUES   (#{id},#{nickname},#{password},#{salt},#{head},#{registerDate},#{lastLoginDate},#{loginCount})
+
+        on DUPLICATE KEY UPDATE
+
+    </insert>
+
 </mapper>

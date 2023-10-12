@@ -1,19 +1,15 @@
 package com.qi.miaosha2.pojo.rabbitmq;
 
-import com.qi.miaosha2.config.ConfirmCallbackService;
-import com.qi.miaosha2.config.ReturnCallbackService;
-import com.qi.miaosha2.pojo.DTO.SeckillMessage;
+import com.qi.miaosha2.config.MQ.ConfirmCallbackService;
+import com.qi.miaosha2.config.MQ.ReturnCallbackService;
 import org.springframework.amqp.AmqpException;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.core.MessagePostProcessor;
-import org.springframework.amqp.rabbit.connection.CorrelationData;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.UUID;
 
 @Service
 public class MQSender {//发送者
@@ -82,7 +78,7 @@ public class MQSender {//发送者
 
 //        //设置交换器的确认
         rabbitTemplate.setConfirmCallback(confirmCallbackService);
-        rabbitTemplate.setReturnsCallback(returnCallbackService);
+//        rabbitTemplate.setReturnsCallback(returnCallbackService); 推荐用这个确认模式
 //        Thread.sleep(5000);
         //这里故意将routingKey参数写入错误，让其应发确认消息送到队列失败回调
         rabbitTemplate.convertAndSend("qiyongleduilACK", "qiACK", message);

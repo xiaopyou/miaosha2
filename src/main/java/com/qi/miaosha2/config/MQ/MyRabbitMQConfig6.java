@@ -1,4 +1,4 @@
-package com.qi.miaosha2.config;
+package com.qi.miaosha2.config.MQ;
 import org.springframework.amqp.core.*;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;

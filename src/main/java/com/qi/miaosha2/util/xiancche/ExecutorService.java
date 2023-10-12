@@ -8,7 +8,7 @@ import java.util.concurrent.*;
 
 @Configuration
 public class ExecutorService {//自定义线程池要不了springboot自带的线程池是无边界的
-   @Bean
+   @Bean("zdy")
     public static ThreadPoolExecutor newCachedThreadPool() {
 
         return new ThreadPoolExecutor(  20,

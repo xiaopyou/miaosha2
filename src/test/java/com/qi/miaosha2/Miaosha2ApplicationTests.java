@@ -1,9 +1,12 @@
 package com.qi.miaosha2;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.qi.miaosha2.controller.cs;
+import com.qi.miaosha2.controller.cs2;
 import com.qi.miaosha2.entrty.TUser;
 import com.qi.miaosha2.entrty.tgoodss;
 import com.qi.miaosha2.mapper.TGoodsmapper;
+import com.qi.miaosha2.mapper.tusermapper;
 import com.qi.miaosha2.pojo.rabbitmq.MQReceiver;
 import com.qi.miaosha2.service.TSeckillOrderservice;
 import com.qi.miaosha2.service.impl.BatchInsertServiceImpl;
@@ -165,20 +168,60 @@ class Miaosha2ApplicationTests {
 
     @Test
     public void  ss(){
-        String asd=null;
-        String aa=new String(asd);
+//        String asd=null;
+//        String aa=new String(asd);
+//        List<Integer> a=new ArrayList<>();
+//        a.add(4);
         HashSet<String> list=new HashSet<>();
+        list.add("ss");
+        list.add("ss2");
+        list.add("sb");
+        list.add("ss3");
         Iterator<String> it=list.iterator(); //获取当前集合里面的值
         while (it.hasNext()){//it.hasNext() 迭代器 是否还有元素
          String ele= it.next(); //it.next() 获取当前集合值
             if (ele.contains("sb")){ // 判断当前值是否为 sb如果是就true没有false
-it.remove();
+            it.remove();
 
             }
 
         }
+        System.out.println(list.toString());
+    }
+    @Resource
+    com.qi.miaosha2.controller.cs2 cs2;
+    @Test
+    public void  Asynccs(){
+
+
+
+            cs2.ss();
+            System.out.println("启动");
+
+
+
+
+
 
     }
+//
 
+@Test
+public void  sadas(){
+
+
+    LambdaQueryWrapper<TUser> queryWrapper=new LambdaQueryWrapper<>();
+    TUser tUser=new TUser();
+
+
+   int i=  tusermapper.cs(tUser);
+   System.out.println(i);
+
+
+
+
+
+
+}
 
 }

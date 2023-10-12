@@ -1,4 +1,4 @@
-package com.qi.miaosha2.config;
+package com.qi.miaosha2.config.MQ;
 
 import org.springframework.amqp.core.AcknowledgeMode;
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;

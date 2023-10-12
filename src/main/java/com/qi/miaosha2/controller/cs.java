@@ -1,11 +1,9 @@
 package com.qi.miaosha2.controller;
 
-import cn.hutool.json.JSON;
-import cn.hutool.json.JSONArray;
-import cn.hutool.json.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.google.common.util.concurrent.RateLimiter;
 import com.google.gson.Gson;
+import com.qi.miaosha2.config.Aop.LogAnnotation;
 import com.qi.miaosha2.entrty.*;
 import com.qi.miaosha2.mapper.TGoodsmapper;
 import com.qi.miaosha2.mapper.TSeckillGoodsmapper;
@@ -15,15 +13,12 @@ import com.qi.miaosha2.pojo.DTO.diandancha;
 import com.qi.miaosha2.pojo.rabbitmq.MQSender;
 import com.qi.miaosha2.service.TSeckillGoodsservice;
 import com.qi.miaosha2.service.TSeckillOrderservice;
-import com.qi.miaosha2.service.tuserservice;
 import com.qi.miaosha2.util.MD5util;
 import com.qi.miaosha2.util.RespEntity;
-import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -52,12 +47,14 @@ com.qi.miaosha2.service.tuserservice tuserservice;
   RedisTemplate<String,Object> redis;
   @Autowired
   MQSender mqSender;
+
   private Map<Long,Boolean> EmptyStocMap =new HashMap<>();//标记reids库存是否还有 有库存 false 没有 true
   public static final ThreadLocal t= new ThreadLocal();
+
 @PostMapping("dlu")
   public RespEntity cs(@RequestBody TUser tUser){
-  System.out.println(tUser);
 
+  System.out.println(tUser);
   return tuserservice.dlu(tUser);
   }
 

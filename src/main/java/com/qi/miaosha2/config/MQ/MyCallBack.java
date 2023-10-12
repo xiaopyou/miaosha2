@@ -1,4 +1,4 @@
-package com.qi.miaosha2.config;
+package com.qi.miaosha2.config.MQ;
 
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.connection.CorrelationData;
@@ -32,7 +32,7 @@ public class MyCallBack implements RabbitTemplate.ConfirmCallback, RabbitTemplat
     public void confirm(CorrelationData correlationData, boolean ack, String cause) {
         if(ack){
 //            log.info("交换机已经收到 ID 为：{} 的消息",correlationData.getId());
-            System.out.println("交换机已经收到 ID 为：{} 的消息"+correlationData.getId());
+            System.out.println("交换机已经收到 ID 为：{} 的消息有没有用"+correlationData.getId());
         }else{
 //            log.info("交换机未收到 ID为 {} 的消息,原因是 {}",correlationData.getId(),cause);
             System.out.println("交换机未收到 ID为 {} 的消息,原因是 {}"+correlationData.getId()+cause);
